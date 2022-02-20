@@ -24,62 +24,62 @@ impl Solution {
     }
 
     // 先二分查找搜索边界，然后遍历边界内的。
-    // pub fn find_number_in2_d_array(self, matrix: Vec<Vec<i32>>, target: i32) -> bool {
-    //     let n = matrix.len();
-    //     let m = match matrix.get(0) {
-    //         Some(v) => v.len(),
-    //         None => 0,
-    //     };
+    pub fn find_number_in2_d_array1(self, matrix: Vec<Vec<i32>>, target: i32) -> bool {
+        let n = matrix.len();
+        let m = match matrix.get(0) {
+            Some(v) => v.len(),
+            None => 0,
+        };
 
-    //     let mut left_n: i32 = 0;
-    //     let mut right_n: i32 = m as i32 - 1;
+        let mut left_n: i32 = 0;
+        let mut right_n: i32 = m as i32 - 1;
 
-    //     while left_n <= right_n {
-    //         let mid: usize = ((left_n + right_n) / 2) as usize;
-    //         let val = match matrix[0].get(mid){
-    //             Some(v) => v,
-    //             None => return false,
-    //         };
-    //         if *val < target {
-    //             left_n = mid as i32 + 1;
-    //         } else if *val == target {
-    //             return true;
-    //         } else {
-    //             right_n = mid as i32 - 1;
-    //         }
-    //     }
+        while left_n <= right_n {
+            let mid: usize = ((left_n + right_n) / 2) as usize;
+            let val = match matrix[0].get(mid){
+                Some(v) => v,
+                None => return false,
+            };
+            if *val < target {
+                left_n = mid as i32 + 1;
+            } else if *val == target {
+                return true;
+            } else {
+                right_n = mid as i32 - 1;
+            }
+        }
 
-    //     let mut left_m: i32 = 0;
-    //     let mut right_m: i32 = n as i32 - 1;
+        let mut left_m: i32 = 0;
+        let mut right_m: i32 = n as i32 - 1;
 
-    //     while left_m <= right_m {
-    //         let mid: usize = ((left_m + right_m) / 2) as usize;
-    //         let val = match matrix[mid].get(0){
-    //             Some(v) => v,
-    //             None => return false,
-    //         };
-    //         if *val < target {
-    //             left_m = mid as i32 + 1;
-    //         } else if *val == target {
-    //             return true;
-    //         } else {
-    //             right_m = mid as i32 - 1;
-    //         }
-    //     }
+        while left_m <= right_m {
+            let mid: usize = ((left_m + right_m) / 2) as usize;
+            let val = match matrix[mid].get(0){
+                Some(v) => v,
+                None => return false,
+            };
+            if *val < target {
+                left_m = mid as i32 + 1;
+            } else if *val == target {
+                return true;
+            } else {
+                right_m = mid as i32 - 1;
+            }
+        }
 
-    //     for i in 0..left_m as usize {
-    //         for j in 0..left_n as usize {
-    //             if matrix[i][j] == target {
-    //                 return true;
-    //             }
-    //         }
-    //     }
+        for i in 0..left_m as usize {
+            for j in 0..left_n as usize {
+                if matrix[i][j] == target {
+                    return true;
+                }
+            }
+        }
 
-    //     false
-    // }
+        false
+    }
 
     // 二叉搜索树查找
-    pub fn find_number_in2_d_array(self, matrix: Vec<Vec<i32>>, target: i32) -> bool {
+    pub fn find_number_in2_d_array2(self, matrix: Vec<Vec<i32>>, target: i32) -> bool {
         let mut i: i32 = matrix.len() as i32 - 1;
         let mut j: i32 = 0;
         let m: i32 = match matrix.get(0) {
@@ -101,15 +101,15 @@ impl Solution {
 }
 
 fn main() {
-    // let nums = vec![];
-    // let nums = vec![vec![1, 1]];
-    // let nums = vec![
-    //     vec![1],
-    //     vec![2],
-    //     vec![3],
-    //     vec![10],
-    //     vec![18],
-    //   ];
+    let nums = vec![];
+    let nums = vec![vec![1, 1]];
+    let nums = vec![
+        vec![1],
+        vec![2],
+        vec![3],
+        vec![10],
+        vec![18],
+      ];
     let nums = vec![
         vec![1, 4, 7, 11, 15],
         vec![2, 5, 8, 12, 19],
@@ -119,6 +119,6 @@ fn main() {
     ];
     let target = 2;
     let s = Solution::new();
-    let flag = s.find_number_in2_d_array(nums, target);
-    println!("{}", flag);
+    println!("{}", s.find_number_in2_d_array1(nums, target));
+    println!("{}", s.find_number_in2_d_array2(nums, target));
 }
