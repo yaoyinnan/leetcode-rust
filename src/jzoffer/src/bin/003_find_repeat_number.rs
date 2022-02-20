@@ -22,37 +22,37 @@ impl Solution {
     }
 
     // 循环笨方法
-    // pub fn find_repeat_number(self, mut nums: Vec<i32>) -> i32 {
-    //     nums.sort();
-    //     let mut repeat_num = &nums[0];
-    //     let first: usize = 1;
-    //     let end: usize = nums.len();
-    //     for i in first..end{
-    //         if *repeat_num == nums[i]{
-    //             break
-    //         } else {
-    //             repeat_num = &nums[i];
-    //         }
-    //     }
-    //     *repeat_num
-    // }
+    pub fn find_repeat_number1(self, mut nums: Vec<i32>) -> i32 {
+        nums.sort();
+        let mut repeat_num = &nums[0];
+        let first: usize = 1;
+        let end: usize = nums.len();
+        for i in first..end{
+            if *repeat_num == nums[i]{
+                break
+            } else {
+                repeat_num = &nums[i];
+            }
+        }
+        *repeat_num
+    }
 
-    // // HashSet
-    // pub fn find_repeat_number(self, nums: Vec<i32>) -> i32 {
-    //     let mut hashset = HashSet::new();
-    //     for num in nums.iter(){
-    //         if hashset.contains(num){
-    //             return *num;
-    //         } else {
-    //             hashset.insert(num);
-    //         }
-    //     }
-    //     -1
-    // }
+    // HashSet
+    pub fn find_repeat_number2(self, nums: Vec<i32>) -> i32 {
+        let mut hashset = HashSet::new();
+        for num in nums.iter(){
+            if hashset.contains(num){
+                return *num;
+            } else {
+                hashset.insert(num);
+            }
+        }
+        -1
+    }
 
     // 借助题目“长度为n的数组里，所有元素都在0 ~ n-1范围内”的特性，以数组元素值为索引，判断元素值与索引元素值是否相等，如果相等则证明重复，否则交换。
     // TODO 存在问题
-    pub fn find_repeat_number(self, mut nums: Vec<i32>) -> i32 {
+    pub fn find_repeat_number3(self, mut nums: Vec<i32>) -> i32 {
         for i in 0..nums.len() {
             println!("{:?}", nums);
             let index = nums[i] as usize;
@@ -72,6 +72,8 @@ impl Solution {
 fn main(){
     let nums = vec![3, 4, 2, 0, 0, 1];
     let s = Solution::new();
-    let repeat_num = s.find_repeat_number(nums);
-    println!("{}", repeat_num);
+    println!("{}", s.find_repeat_number1(nums));
+    println!("{}", s.find_repeat_number2(nums));
+    println!("{}", s.find_repeat_number3(nums));
+
 }
